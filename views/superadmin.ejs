@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superadmin Panel</title>
+</head>
+
+<body>
+    <h1>Superadmin Panel</h1>
+
+    <!-- Mostrar lista de usuarios -->
+    <h2>Lista de Usuarios</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user=> { %>
+                <tr>
+                    <td>
+                        <%= user.id %>
+                    </td>
+                    <td>
+                        <%= user.user %>
+                    </td>
+                    <td>
+                        <%= user.name %>
+                    </td>
+                    <td>
+                        <%= user.role_id %>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+
+    <!-- Formulario para asignar roles -->
+    <h2>Asignar Roles</h2>
+    <form action="/assign-role" method="post">
+        <label for="userId">ID de Usuario:</label>
+        <input type="text" id="userId" name="userId" required>
+        <label for="roleId">ID de Rol:</label>
+        <input type="text" id="roleId" name="roleId" required>
+        <button type="submit">Asignar Rol</button>
+    </form>
+
+</body>
+
+</html>

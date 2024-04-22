@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
+const path = require('path'); // Importar el módulo path
 
 const app = express()
 
@@ -9,6 +10,7 @@ app.set('view engine', 'ejs')
 
 //seteamos la carpeta public para archivos estáticos
 app.use(express.static('public'))
+app.set('views', path.join(__dirname, 'views')); // Directorio de vistas
 
 //para procesar datos enviados desde forms
 app.use(express.urlencoded({extended:true}))

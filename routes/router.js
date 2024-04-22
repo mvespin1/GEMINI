@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
+const geminiController = require("../controllers/geminiController");
 
 // Middleware para verificar el rol de usuario
 const checkRole = (requiredRole) => (req, res, next) => {
@@ -48,5 +49,7 @@ router.post('/assign-role', authController.isAuthenticated, checkRole(3), authCo
 router.post('/register', authController.register);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
+router.post("/consultar", geminiController.consultar);
+
 
 module.exports = router;

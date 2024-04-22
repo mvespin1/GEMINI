@@ -7,7 +7,6 @@ exports.register = async (req, res) => {
     try {
         const { name, user, pass, role_id } = req.body;
         const passHash = await bcryptjs.hash(pass, 8);
-        
         conexion.query('INSERT INTO users SET ?', { user, name, pass: passHash, role_id }, (error, results) => {
             if(error) {
                 console.log(error);

@@ -5,52 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Superadmin Panel</title>
+    <link rel="icon" type="image/x-icon" href="/img/ecuador_escudo.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-    <h1>Superadmin Panel</h1>
-
+    <h1 class="font-serif text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Superadmin Panel</h1>
     <!-- Mostrar lista de usuarios -->
-    <h2>Lista de Usuarios</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Usuario</th>
-                <th>Nombre</th>
-                <th>Rol</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% users.forEach(user=> { %>
+    <h2 class="font-serif mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl dark:text-white">Lista de Usuarios</h2>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-[#E1EFFE] dark:text-[#E1EFFE]-100">
+            <thead class="text-xs text-white uppercase bg-[#233876] border-b border-blue-400 dark:text-white">
                 <tr>
-                    <td>
-                        <%= user.id %>
-                    </td>
-                    <td>
-                        <%= user.user %>
-                    </td>
-                    <td>
-                        <%= user.name %>
-                    </td>
-                    <td>
-                        <%= user.role_id %>
-                    </td>
+                    <th scope="col" class="px-6 py-3">ID</th>
+                    <th scope="col" class="px-6 py-3">Usuario</th>
+                    <th scope="col" class="px-6 py-3">Nombre</th>
+                    <th scope="col" class="px-6 py-3">Rol</th>
                 </tr>
-                <% }); %>
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+                <% users.forEach(user=> { %>
+                    <tr class="bg-[#1E429F] border-b border-blue-400 hover:bg-[#5850EC]">
+                        <td class="px-6 py-4">
+                            <%= user.id %>
+                        </td>
+                        <td class="px-6 py-4">
+                            <%= user.user %>
+                        </td>
+                        <td class="px-6 py-4">
+                            <%= user.name %>
+                        </td>
+                        <td class="px-6 py-4">
+                            <%= user.role_id %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
     <!-- Formulario para asignar roles -->
-    <h2>Asignar Roles</h2>
-    <form action="/assign-role" method="post">
-        <label for="userId">ID de Usuario:</label>
-        <input type="text" id="userId" name="userId" required>
-        <label for="roleId">ID de Rol:</label>
-        <input type="text" id="roleId" name="roleId" required>
-        <button type="submit">Asignar Rol</button>
-    </form>
-
+    <h2 class="text-center font-serif mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl dark:text-white">Asignar Roles</h2>
+    <div class="max-w-sm p-3 bg-white border border-yellow-600 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto my-10">
+        <form action="/assign-role" method="post">
+            <div class="relative">
+                <input type="text" id="userId" class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <label for="userId" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">ID de Usuario:</label>
+            </div>
+            <div class="relative">
+                <input type="text" id="roleId" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <label for="roleId" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">ID de Rol:</label>
+            </div>
+            <button class="bg-[#0E9F6E] hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" type="submit">Asignar Rol</button>
+            <button class="bg-[#F05252] hover:bg-red-200 text-black font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">
+                <a href="/logout">Cerrar sesión</a>
+            </button>
+        </form>
+        
+    </div>
 </body>
 
 </html>

@@ -7,30 +7,30 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.87.0">
     <link rel="icon" type="image/x-icon" href="/img/ecuador_escudo.ico">
-    <!--<script src="https://cdn.tailwindcss.com"></script>-->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>LOGIN CON NODE + JWT</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"> 
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
   </head>
-  <body class="text-center">
-    <main class="form-signin text-center shadow-lg p-3 mb-5">
-      <form id="formLogin" action="/login" method="POST">
-        <img class="mb-4" src="img/bootstrap-logo.svg" alt="" width="72" height="57">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="user" name="user" placeholder="User">
-          <label for="user">User</label>
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <main class="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
+      <form id="formLogin" action="/login" method="POST" class="text-center">
+        <img class="mx-auto mb-6" src="./img/logoMinisterio.jpg" alt="" width="200" height="100">
+        <div class="mb-4">
+          <label for="user" class="sr-only">User</label>
+          <input type="text" id="user" name="user" class="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring" placeholder="User">
         </div>
-        <div class="form-floating">
-          <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
-          <label for="pass">Password</label>
+        <div class="mb-4">
+          <label for="pass" class="sr-only">Password</label>
+          <input type="password" id="pass" name="pass" class="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring" placeholder="Password">
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>    
+        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring" type="submit">Login</button>
       </form>
       <br>
-      <a href="/register" type="button" class="w-100 btn btn-lg btn-bd-primary">Registrarse</a>
+      <a href="/register" class="block w-full bg-transparent border border-blue-500 hover:border-blue-600 text-blue-500 hover:text-blue-600 font-semibold py-2 px-4 rounded-md text-center focus:outline-none focus:ring">Registrarse</a>
     </main>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <% if(alert) { %>

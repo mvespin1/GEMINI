@@ -51,5 +51,4 @@ router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 router.post("/consultar", geminiController.consultar);
 
-
 module.exports = router;

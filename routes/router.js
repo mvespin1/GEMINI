@@ -14,7 +14,7 @@ const checkRole = (requiredRole) => (req, res, next) => {
 router.get('/', authController.isAuthenticated, async (req, res) => {
     try {
         const users = await authController.getAllUsers();
-        console.log(users); // Agrega este console.log para verificar si `users` se está recibiendo correctamente
+        console.log(users); // Agrega este console.log para verificar si users se está recibiendo correctamente
         if (req.user) {
             if (req.user.role_id === 1) {
                 // Redirigir al usuario regular a su vista
@@ -51,4 +51,5 @@ router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 router.post("/consultar", geminiController.consultar);
 
-module.exports = router;
+
+module.exports = router;

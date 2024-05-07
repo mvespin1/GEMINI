@@ -1,19 +1,22 @@
+// UserModel.js
+const bcryptjs = require('bcryptjs');
 const conexion = require('../database/db');
 
 class UserModel {
-    static async create({ name, user, pass, role_id }) {
+    static async createUser(name, user, pass, roleId) {
+        const passHash = await bcryptjs.hash(pass, 8);
         return new Promise((resolve, reject) => {
-            conexion.query('INSERT INTO users SET ?', { user, name, pass, role_id }, (error, results) => {
+            conexion.query('INSERT INTO users SET ?', { user, name, pass: passHash, role_id: roleId }, (error, results) => {
                 if (error) {
                     reject(error);
                 } else {
-                    resolve(results);
+                    resolve(results.insertId);
                 }
             });
         });
     }
 
-    static async findByUsername(username) {
+    static async getByUsername(username) {
         return new Promise((resolve, reject) => {
             conexion.query('SELECT * FROM users WHERE user = ?', [username], (error, results) => {
                 if (error) {
@@ -25,29 +28,13 @@ class UserModel {
         });
     }
 
-    static async findById(userId) {
+    static async updateRole(userId, roleId) {
         return new Promise((resolve, reject) => {
-            conexion.query('SELECT * FROM users WHERE id = ?', [userId], (error, results) => {
+            conexion.query('UPDATE users SET role_id = ? WHERE id = ?', [roleId, userId], (error, results) => {
                 if (error) {
                     reject(error);
                 } else {
-                    resolve(results[0]);
-                }
-            });
-        });
-    }
-
-    async updateRole(roleId) {
-        // Implement update role logic
-    }
-
-    static async findAll() {
-        return new Promise((resolve, reject) => {
-            conexion.query('SELECT * FROM users', (error, results) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    resolve(results);
+                    resolve();
                 }
             });
         });

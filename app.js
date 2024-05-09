@@ -36,3 +36,10 @@ app.use(function(req, res, next) {
 app.listen(3000, ()=>{
     console.log('SERVER UP runnung in http://localhost:3000')
 })
+// Ruta para obtener los datos desde la base de datos
+app.get('/obtenerDatos', (req, res) => {
+    connection.query('SELECT * FROM preguntas', (error, results) => {
+        if (error) throw error;
+        res.json(results); // Enviar los resultados como JSON al cliente
+    });
+});

@@ -120,7 +120,7 @@ exports.assignRole = async (req, res) => {
         // Actualizamos el rol del usuario en la base de datos
         await updateUserRole(userId, roleId);
 
-        res.redirect('/superadmin'); // Redireccionar después de actualizar el rol
+        res.redirect('/login'); // Redireccionar después de actualizar el rol
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error interno del servidor' });

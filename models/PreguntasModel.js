@@ -1,4 +1,6 @@
-const conexion = require('../database/db'); // Reemplaza '../database/db' con la ubicación de tu archivo de conexión
+// PreguntasModel.js
+
+const conexion = require('../database/db'); // Reemplaza './conexion' con la ubicación de tu archivo de conexión
 
 async function obtenerPreguntasYRespuestas() {
     return new Promise((resolve, reject) => {

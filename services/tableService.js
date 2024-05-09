@@ -1,4 +1,5 @@
-const PreguntasModel = require("../../PreguntasModel");
+// Importar el módulo PreguntasModel.js
+const PreguntasModel = require('../PreguntasModel');
 
 let dataTable;
 let dataTableIsInitialized = false;
@@ -12,9 +13,9 @@ const dataTableOptions = {
     language: {
         lengthMenu: "Mostrar MENU registros por página",
         zeroRecords: "Ningún usuario encontrado",
-        info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
+        info: "Mostrando de START a END de un total de TOTAL registros",
         infoEmpty: "Ningún usuario encontrado",
-        infoFiltered: "(filtrados desde _MAX_ registros totales)",
+        infoFiltered: "(filtrados desde MAX registros totales)",
         search: "Buscar:",
         loadingRecords: "Cargando...",
         paginate: {
@@ -31,27 +32,27 @@ const initDataTable = async () => {
         dataTable.destroy();
     }
 
-    await listUsers();
+    await listPreguntas(); // Cambiar a listPreguntas()
 
-    dataTable = $("#example").DataTable(dataTableOptions);
+    dataTable = $("#datatable_preguntas").DataTable(dataTableOptions); // Cambiar a #datatable_preguntas
 
     dataTableIsInitialized = true;
 };
 
-const listUsers = async () => {
+const listPreguntas = async () => { // Cambiar a listPreguntas()
     try {
-        const data = await PreguntasModel.obtenerTodaLaTabla();
+        const preguntas = await PreguntasModel.obtenerTodaLaTabla(); // Usar obtenerTodaLaTabla() del módulo PreguntasModel
 
         let content = ``;
-        data.forEach((row, index) => {
+        preguntas.forEach((pregunta, index) => { // Iterar sobre las preguntas
             content += `
                 <tr>
                     <td>${index + 1}</td>
-                    <td>${row.pregunta}</td>
-                    <td>${row.respuesta}</td>
+                    <td>${pregunta.pregunta}</td> <!-- Muestra la pregunta -->
+                    <td>${pregunta.respuesta}</td> <!-- Muestra la respuesta -->
                 </tr>`;
         });
-        $("#datatable_users").html(content);
+        tableBody_preguntas.innerHTML = content; // Cambiar a tableBody_preguntas
 
         if (dataTableIsInitialized) {
             dataTable.draw();
@@ -64,5 +65,6 @@ const listUsers = async () => {
 window.addEventListener("load", async () => {
     await initDataTable();
 
+    // Renderizar automáticamente la aplicación cada 5 segundos
     setInterval(initDataTable, 5000);
 });

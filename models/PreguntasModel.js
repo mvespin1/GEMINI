@@ -1,6 +1,6 @@
 // PreguntasModel.js
 
-const conexion = require('../database/db'); // Reemplaza './conexion' con la ubicación de tu archivo de conexión
+const conexion = require('../database/db'); 
 
 async function obtenerPreguntasYRespuestas() {
     return new Promise((resolve, reject) => {
@@ -15,6 +15,20 @@ async function obtenerPreguntasYRespuestas() {
     });
 }
 
+async function obtenerTodaLaTabla() {
+    return new Promise((resolve, reject) => {
+        const query = "SELECT * FROM preguntas";
+        conexion.query(query, (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+}
+
 module.exports = {
-    obtenerPreguntasYRespuestas
+    obtenerPreguntasYRespuestas,
+    obtenerTodaLaTabla
 };

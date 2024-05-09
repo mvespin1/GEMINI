@@ -2,49 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- DataTable -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
-    <!-- Bootstrap-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"/>
-    <title>Document</title>
+    <title>Admin Panel</title>
+    <!-- Incluye los archivos CSS de DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <div class="container my-5">
-        <div class="row">
-            <table id="example" class="table table-striped" style="width: 100%">
-                <caption>Preguntas mas comunes</caption>
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Pregunta</th>
-                        <th>Respuesta</th>
-                    </tr>
-                </thead>
-                <tbody id="datatable_users"></tbody>
-            </table>
-        </div>
-    </div>
-    <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- DataTable -->
-    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-    <!-- Bootstrap-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Tu script personalizado -->
-    <script src="../services/tableService.js"></script>
-    <!-- Llamar a la función initDataTable al cargar la página -->
+    <h1>Admin Panel</h1>
+    <!-- Agrega una tabla con un ID para DataTables -->
+    <table id="preguntasTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pregunta</th>
+                <th>Respuesta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos se llenarán dinámicamente aquí -->
+        </tbody>
+    </table>
+
+    <!-- Incluye los archivos JS de jQuery y DataTables -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
     <script>
-        window.addEventListener("load", async () => {
-            await initDataTable();
-            // Renderizar automáticamente la aplicación cada 5 segundos
-            setInterval(initDataTable, 5000);
+        $(document).ready(function() {
+            $('#preguntasTable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "/api/preguntas", // Esta es la ruta donde obtendrás los datos del servidor
+                "columns": [
+                    { "data": "id" },
+                    { "data": "pregunta" },
+                    { "data": "respuesta" }
+                ]
+            });
+
+            const dataTableOptions = {
+                scrollCollapse: true,
+                lengthMenu: [
+                    [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+                    [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+                ],
+                pageLength: 100,
+                destroy: true,
+                autoWidth: true,
+                language: {
+                    lengthMenu: "Mostrar MENU registros por página",
+                    zeroRecords: "Ningún usuario encontrado",
+                    info: "Mostrando de START a END de un total de TOTAL registros",
+                    infoEmpty: "Ningún usuario encontrado",
+                    infoFiltered: "(filtrados desde MAX registros totales)",
+                    search: "Buscar:",
+                    loadingRecords: "Cargando...",
+                    paginate: {
+                        first: "Primero",
+                        last: "Último",
+                        next: "Siguiente",
+                        previous: "Anterior"
+                    }
+                }
+            };
+
+            const listUsers = async () => {
+                try {
+                    const response = await fetch("./backend/conexion.php"); 
+                    const users = await response.json();
+                    let content = ``;
+                    users.forEach((user, index) => {
+                        content += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${user.nombre}</td>
+                                <td>${user.extension_telefono}</td>
+                            </tr>`;
+                    });
+                    $('#preguntasTable tbody').html(content);
+                } catch (ex) {
+                    console.error(ex);
+                }
+            };
+
+            listUsers();
         });
     </script>
-    <button class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">
-        <a href="/logout">Cerrar sesión</a>
-    </button>
 </body>
 </html>

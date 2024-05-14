@@ -69,3 +69,4 @@ async function consultarGEMINI(consulta) {
 module.exports = {
     consultarGEMINI,
 };
+

@@ -8,40 +8,51 @@
     <link rel="icon" type="image/x-icon" href="/img/ecuador_escudo.ico">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body>
-    <h1 class="font-serif text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-black">Superadmin Panel</h1>
-  
-    <h2 class="font-serif mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl dark:text-black">Lista de Usuarios</h2>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">        
-        <table class="w-full text-sm text-left rtl:text-right text-[#E1EFFE] dark:text-[#E1EFFE]-100">
-            <thead class="text-xs text-white uppercase bg-[#233876] border-b border-blue-400 dark:text-white">
-                <tr>
-                    <th scope="col" class="px-6 py-3">ID</th>
-                    <th scope="col" class="px-6 py-3">Usuario</th>
-                    <th scope="col" class="px-6 py-3">Nombre</th>
-                    <th scope="col" class="px-6 py-3">Rol</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% users.forEach(user=> { %>
-                    <tr class="bg-[#1E429F] border-b border-blue-400 hover:bg-[#5850EC]">
-                        <td class="px-6 py-4">
-                            <%= user.id %>
-                        </td>
-                        <td class="px-6 py-4">
-                            <%= user.user %>
-                        </td>
-                        <td class="px-6 py-4">
-                            <%= user.name %>
-                        </td>
-                        <td class="px-6 py-4">
-                            <%= user.role_id %>
-                        </td>
+    
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="relative mt-1">
+            <h1 class="font-serif text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-black">Superadmin Panel</h1>
+            <h2 class="font-serif mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl dark:text-black">Lista de Usuarios</h2>
+        </div>        
+        <div class="p-4">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="p-4">ID</th>
+                        <th scope="col" class="p-4">Usuario</th>
+                        <th scope="col" class="p-4">Nombre</th>
+                        <th scope="col" class="p-4">Rol</th>
                     </tr>
-                    <% }); %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody >
+                    <% users.forEach(user=> { %>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <%= user.id %>
+                                </div>
+                            </td>
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <%= user.user %>
+                                </div>
+                            </td>
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <%= user.name %>
+                                </div>
+                            </td>
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <%= user.role_id %>
+                                </div>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <h2 class="text-center font-serif mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl dark:text-black">Asignar Roles</h2>
